@@ -59,4 +59,4 @@ typings/
 
 ## ARQUIVO A SER GERADO PELO WEBPACK
 dist/bundle.js
-
+electron/main.js
