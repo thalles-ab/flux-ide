@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+
+.container{
+  height: 100%; 
+  position: relative;
+}
+
+.grid-50{
+    float: left;
+    width: 50%;
+    height: 100%;
+}

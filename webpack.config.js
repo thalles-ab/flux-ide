@@ -1,3 +1,5 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 module.exports = {
     entry: "./src/hello.tsx",
     output: {
@@ -12,7 +14,9 @@ module.exports = {
                 { from: /./, to: '/proj/404.html' }, // fazer
             ],
         },
-        hot: true
+        contentBase: './',
+        hot: true,
+        inline: true
         // https: false
     }, 
  
@@ -34,12 +38,12 @@ module.exports = {
             
             // BABEL CONFIG
             {
-                test: /\.js$/,
+                test: /\.js$/, 
                 exclude: /(node_modules|bower_components)/,
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    presets: ['@babel/preset-env']
+                    presets: ["es2015", "react"]
                   }
                 }
               }
@@ -54,4 +58,17 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     },
+
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.LoaderOptionsPlugin({ debug: true }),
+        new webpack.SourceMapDevToolPlugin({ exclude: /node_modules/ }),
+        new webpack.DefinePlugin({
+            'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development') },
+        }),
+        new CopyWebpackPlugin([{
+            from: 'node_modules/monaco-editor/min/vs',
+            to: 'vs',
+        }]),
+    ],
 };
