@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+## ARQUIVO A SER GERADO PELO WEBPACK
+dist/bundle.js
+
