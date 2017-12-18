@@ -1,7 +1,9 @@
 import * as React from "react";
 import MyEditor from 'react-monaco-editor';
 
-interface MyProps{};
+interface MyProps{
+    callBackChangeEditor: (val: string) => void
+};
 interface MyState{
     code: string
 };
@@ -15,16 +17,7 @@ export class Editor extends React.Component<MyProps, MyState> {
     }
 
     editorDidMount(editor: monaco.editor.ICodeEditor, master : typeof monaco) {
-        console.log('editorDidMount', editor);
-        master.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
-            allowComments: true
-        });
         editor.focus();
-    }
-
-    onChange(newValue: string, e: monaco.editor.IModelContentChangedEvent) {
-        console.log('onChange', newValue, e);
     }
 
     render() {
@@ -40,7 +33,7 @@ export class Editor extends React.Component<MyProps, MyState> {
                 theme="vs-dark"
                 value={code}
                 options={options}
-                onChange={this.onChange}
+                onChange={this.props.callBackChangeEditor}
                 editorDidMount={this.editorDidMount}
             />
         );

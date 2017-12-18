@@ -5,12 +5,27 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import { Editor } from "./components/Editor"; 
 import { Diagram } from './components/Diagram'
 
+const Dispatcher = require('flux').Dispatcher;
+var AppDispatcher = new Dispatcher();
+
 export default class App extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
+    changeEditor(val : string){
+        console.log('foi thalles ' + val);
+    }
+
+    updateDiagram(){
+        console.log('diagrama');
+    }
+
     render(){
         return (
             <div className="container">
-                <div className="grid-50"><Editor /></div>
-                <div className="grid-50"><Diagram /></div>
+                <div className="grid-50"><Editor callBackChangeEditor={this.changeEditor} /></div>
+                <div className="grid-50"><Diagram callbackChangeEditor={this.updateDiagram} /></div>
             </div>
         );
       } 
@@ -21,6 +36,7 @@ ReactDOM.render(
     document.getElementById("root")
 ); 
 
-window.onbeforeunload = function() {
-    return "Dude, are you sure you want to refresh? Think of the kittens!";
+// UTILIZAR ANCORAS PARA ENCONTRAR MUDANÇA DE NÓ
+window.onhashchange = function() {
+    console.log('mudou');
 }

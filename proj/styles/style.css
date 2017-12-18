@@ -25,3 +25,15 @@ html, body {
     width: 50%;
     height: 100%;
 }
+
+.full-parent{
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+#graph svg{
+    width: 100% important;
+    height: 100% important;
+    text-align: center;
+}
