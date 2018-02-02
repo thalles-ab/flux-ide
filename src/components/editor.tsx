@@ -15,25 +15,20 @@ export class Editor extends React.Component<MyProps, MyState> {
     constructor(props : MyProps) {
         super(props);
         this.state = {
-            code : "asdasdasda"
+            code : ""
         };
 
-        AnalyserStore.on("analyserLex", (data) => { this.handleInfo(data); })
+        AnalyserStore.on("analyserLex", (erros) => { this.handleInfo(erros); })
     }
 
-    handleInfo(data: any){
-        console.log(data);
-        // if(data.event.changes){
-        //     editorMyScope.setModelMarkers(data.value, 'c', data.mark);
-        // }
+    handleInfo(errosLex: Array<string>){
+        console.log(errosLex);
         console.log(editorMyScope);
     }
 
     editorDidMount(editor: monaco.editor.ICodeEditor, master : typeof monaco) {
-        editorMyScope = monaco.editor;
+        editorMyScope = editor;
         editor.focus();
-        console.log(editor);
-        window["editorMy"] = editorMyScope;
     }
 
     onchange(val : string, ev: monaco.editor.IModelContentChangedEvent){
@@ -49,8 +44,8 @@ export class Editor extends React.Component<MyProps, MyState> {
         return (
             <MyEditor
                 defaultValue="c"
-                language="c"
-                //theme="vs-dark"
+                language="c, css"
+                theme="vs-dark"
                 value={code}
                 options={options}
                 onChange={this.onchange}

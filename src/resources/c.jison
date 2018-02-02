@@ -1,14 +1,13 @@
-%%
+%lex
 D			[0-9]
 L			[a-zA-Z_]
 H			[a-fA-F0-9]
-E			[Ee][+-]?{D}+
-FS			(f|F|l|L)
-IS			(u|U|l|L)*
-
+E			[Ee][+-]?{D}+	
+FS			("f"|"F"|"l"|"L")	
+IS			("u"|"U"|"l"|"L")*
 
 /* LEXICAL GRAMMAR */
-%lex
+
 
 %%
 "/*"    %{  
@@ -72,7 +71,7 @@ IS			(u|U|l|L)*
 0[xX]{H}+{IS}?		return 'CONSTANT' ;
 0{D}+{IS}?		return 'CONSTANT' ;
 {D}+{IS}?		return 'CONSTANT' ;
-L?'(\\.|[^\\'])+'	return 'CONSTANT' ;
+L?"'(\\.|[^\\'])+'"	return 'CONSTANT' ;
 
 {D}+{E}{FS}?		return 'CONSTANT' ;
 {D}*"."{D}+({E})?{FS}?	return 'CONSTANT' ;
@@ -94,7 +93,7 @@ L?\"(\\.|[^\\"])*\"	return 'STRING_LITERAL' ;
 ">>"			return 'RIGHT_OP' ;
 "<<"			return 'LEFT_OP' ;
 "++"			return 'INC_OP' ;
-"--"			return 'DEC_OP' ;'
+"--"			return 'DEC_OP' ;
 "->"			return 'PTR_OP' ;
 "&&"			return 'AND_OP' ;
 "||"			return 'OR_OP' ;
@@ -131,7 +130,6 @@ L?\"(\\.|[^\\"])*\"	return 'STRING_LITERAL' ;
 .			{ /* ignore bad characters */ }
 
 /lex
-%%
 
 %token IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
 %token PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
@@ -551,3 +549,4 @@ function_definition
 	| declarator declaration_list compound_statement
 	| declarator compound_statement
 	;
+%%

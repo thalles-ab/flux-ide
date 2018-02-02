@@ -3,16 +3,11 @@ import * as CONSTANT from './constants'
 import dispatcher from '../dispatcher'
 import { EventEmitter } from 'events'
 
+enum Severity { Ignore = 0, Info = 1, Warning = 2, Error = 3 }; // ENUNS FOR INFO MARKS MONACO-EDITOR
+
+// CONSTANTES
 var fileJison = require('!!raw-loader!../resources/c.jison');
-
-enum Severity {
-    Ignore = 0,
-    Info = 1,
-    Warning = 2,
-    Error = 3,
-}
-
-let Parser = null;
+const Parser = new jison.Parser(fileJison);
 
 class AnalyserStore extends EventEmitter{
     todo : Array<object>;
@@ -32,15 +27,11 @@ class AnalyserStore extends EventEmitter{
     analyser(value, event){
         var mark = event.changes[0].range;
         mark.serverity = Severity.Error;
-        mark.message = 'puta que o pariu';
+        mark.message = 'puta que o pariu, se funcionar vou no convento';
         mark.code = null;
         mark.source = null;
 
-        if(Parser == null){
-            Parser = new jison.Parser(fileJison);
-        }
-        console.log(Parser);
-        this.emit("analyserLex", { erros: [], value : value, event: event, mark: [mark] });
+        this.emit("analyserLex", { erros: ['ainda não tem'], value : value, event: event, mark: mark });
     }
 
     create(text){
