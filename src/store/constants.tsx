@@ -1,0 +1,2 @@
+export const ACTION_LEX = 'ACTION_LEX'
+export const ACTION_SINTAX = 'ACTION_SINTAX'

@@ -58,5 +58,6 @@ typings/
 .env
 
 ## ARQUIVO A SER GERADO PELO WEBPACK
+dist/*
 dist/*.js
 electron/main.js

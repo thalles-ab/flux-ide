@@ -10,7 +10,7 @@ export class Diagram extends React.Component<MyProps, MyState>{
     constructor(props){
         super(props);
         this.state = {
-            dot : "digraph { a [URL=\"#asdasd\"]; a -> b}"
+            dot : "digraph nomeGrafo { a [URL=\"#asdasd\"]; a -> b}"
         }
     }
 
@@ -18,7 +18,17 @@ export class Diagram extends React.Component<MyProps, MyState>{
         const script = document.createElement("script");
         script.type = "text/javascript";
         script.text = "d3.select('#graph').graphviz()"
-        +".attributer(function(d) { if(d.tag == 'svg') { d.attributes.width = '100%'; d.attributes.height = '100%'; } })"
+        +".attributer("
+        +"  function(d) {" 
+        +"      if(d.tag == 'svg')" 
+        +"      {"
+        +"          d.attributes.width = '100%'; d.attributes.height = '100%';"
+        +"      }"
+        +"      if(d.attributes.fill && d.tag !== 'text'){"
+        +"          if(d.attributes.fill == 'none')"
+        +"              d.attributes.fill='#FFF';"
+        +"      }"
+        +"})"
         +".renderDot('"+this.state.dot+"')";
         script.async = true;
         document.body.appendChild(script);  

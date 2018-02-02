@@ -1,6 +1,11 @@
+
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
+
 module.exports = {
+    //target:"electron-renderer", // change target for build web version ** Thalles batista
     entry: "./src/hello.tsx",
     output: {
         filename: "bundle.js",
@@ -15,8 +20,7 @@ module.exports = {
             ],
         },
         contentBase: './',
-        hot: true,
-        inline: true
+        hot: true
         // https: false
     }, 
  
@@ -30,6 +34,8 @@ module.exports = {
 
     module: {
         rules: [
+            { test: /\.txt$/, use: 'raw-loader' },
+            
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
@@ -43,20 +49,18 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    presets: ["es2015", "react"]
+                    presets: ["es6", "react", "dom"]
                   }
                 }
-              }
-        ]
+              },
+        ],
+        
     },
 
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
     externals: {
         "react": "React",
-        "react-dom": "ReactDOM"
+        "react-dom": "ReactDOM",
+        // "path": "require('path')"
     },
 
     plugins: [
@@ -71,4 +75,9 @@ module.exports = {
             to: 'vs',
         }]),
     ],
+
+    
+    node: {
+        fs: 'empty'
+    }
 };

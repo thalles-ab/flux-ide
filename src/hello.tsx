@@ -5,9 +5,6 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import { Editor } from "./components/Editor"; 
 import { Diagram } from './components/Diagram'
 
-const Dispatcher = require('flux').Dispatcher;
-var AppDispatcher = new Dispatcher();
-
 export default class App extends React.Component{
     constructor(props){
         super(props);
@@ -25,7 +22,10 @@ export default class App extends React.Component{
         return (
             <div className="container">
                 <div className="grid-50"><Editor callBackChangeEditor={this.changeEditor} /></div>
-                <div className="grid-50"><Diagram callbackChangeEditor={this.updateDiagram} /></div>
+                <div className="grid-50">
+                    <div id="appBar"></div>
+                    <Diagram callbackChangeEditor={this.updateDiagram} />
+                </div>
             </div>
         );
       } 
