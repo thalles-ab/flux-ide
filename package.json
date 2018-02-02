@@ -44,14 +44,13 @@
     "brfs": "^1.4.3",
     "concurrently": "^3.5.1",
     "copy-webpack-plugin": "^4.2.3",
-    "electron": "1.7.9",
+    "electron": "^1.7.12",
     "raw-loader": "^0.5.1",
     "source-map-loader": "^0.2.3",
     "transform-loader": "^0.2.4",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
-    "webpack-node-externals": "^1.6.0",
     "webpack-target-electron-renderer": "^0.4.0"
   }
 }

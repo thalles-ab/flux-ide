@@ -1,8 +1,6 @@
-
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     //target:"electron-renderer", // change target for build web version ** Thalles batista
