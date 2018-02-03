@@ -2,15 +2,17 @@ import * as jison from 'jison'
 import * as CONSTANT from './constants'
 import dispatcher from '../dispatcher'
 import { EventEmitter } from 'events'
+import TreeParser from '../model/TreeParser'
 
 enum Severity { Ignore = 0, Info = 1, Warning = 2, Error = 3 }; // ENUNS FOR INFO MARKS MONACO-EDITOR
 
 // CONSTANTES
 var fileJison = require('!!raw-loader!../resources/c.jison');
-const Parser = new jison.Parser(fileJison);
+let Parser = null;
 
 class AnalyserStore extends EventEmitter{
     todo : Array<object>;
+    treeParser: TreeParser;
 
     constructor(){
         super();
@@ -18,6 +20,11 @@ class AnalyserStore extends EventEmitter{
             { id: 12313213213, nome : 'teste' },
             { id: 46546546546, nome : 'teste 2' }
         ];
+        this.treeParser = new TreeParser();
+        Parser = new jison.Parser(fileJison);
+        Parser.yy.myTree = this.treeParser;
+        console.log(Parser);
+        window["ParserThalles"] = Parser;
     }
 
     handleActions(action){

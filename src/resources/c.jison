@@ -1,3 +1,4 @@
+
 %lex
 D			[0-9]
 L			[a-zA-Z_]
@@ -150,7 +151,7 @@ L?\"(\\.|[^\\"])*\"	return 'STRING_LITERAL' ;
 %%
 
 primary_expression
-	: IDENTIFIER
+	: IDENTIFIER { }
 	| CONSTANT
 	| STRING_LITERAL
 	| '(' expression ')'
@@ -307,7 +308,10 @@ init_declarator_list
 
 init_declarator
 	: declarator
-	| declarator '=' initializer
+	| declarator '=' initializer { 
+		yy.myTree.addNode($1);
+		yy.myTree.teste(); 
+	}
 	;
 
 storage_class_specifier
