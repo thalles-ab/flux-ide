@@ -1,6 +1,6 @@
 import * as React from "react"
 import MyEditor from 'react-monaco-editor'
-import AnalyserStore from '../store/analyserStore'
+import AnalyserStore from '../store/AnalyserStore'
 
 interface MyProps{
     callBackChangeEditor: (val: string) => void
