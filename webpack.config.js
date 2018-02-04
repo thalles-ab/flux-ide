@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
     //target:"electron-renderer", // change target for build web version ** Thalles batista
-    entry: "./src/hello.tsx",
+    entry: "./src/Hello.tsx",
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist"

@@ -1,6 +1,6 @@
 import * as jison from 'jison'
-import * as CONSTANT from './constants'
-import dispatcher from '../dispatcher'
+import * as CONSTANT from './Constants'
+import dispatcher from '../Dispatcher'
 import { EventEmitter } from 'events'
 import TreeParser from '../model/TreeParser'
 
