@@ -1,7 +1,5 @@
 export default class NodeTree{
-    term: string;
+    constructor(){
 
-    constructor(term){
-        this.term = term;    
     }
 }

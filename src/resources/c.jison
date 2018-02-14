@@ -151,7 +151,7 @@ L?\"(\\.|[^\\"])*\"	return 'STRING_LITERAL' ;
 %%
 
 primary_expression
-	: IDENTIFIER { }
+	: IDENTIFIER
 	| CONSTANT
 	| STRING_LITERAL
 	| '(' expression ')'
@@ -306,11 +306,11 @@ init_declarator_list
 	| init_declarator_list ',' init_declarator
 	;
 
-init_declarator
-	: declarator
+init_declarator 
+	: declarator { console.log($0, $1); yy.myTree.addVar($0, $1); }
 	| declarator '=' initializer { 
-		yy.myTree.addNode($1);
-		yy.myTree.teste(); 
+		console.log($0, $1, $3);
+		yy.myTree.addVar($0, $1, $3); 
 	}
 	;
 
