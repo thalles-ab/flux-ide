@@ -1,25 +1,37 @@
 import NodeTree from './NodeTree';
-import VarTree from './VarTree';
-import IfTree from './IfTree';
+import VarNode from './VarNode';
+import ConditionalNode from './ConditionalNode';
 
 export default class TreeParser{
-    nodes: Array<NodeTree>;
+    //nodes: Array<NodeTree>;
+    nodeRadix: any; // nó raiz
+    nodeAtual: any;
 
     constructor(){
-        this.nodes = [];
+        
+    }
+
+    init(node){
+        if(this.nodeRadix){
+            this.nodeRadix = node;
+        }
+        this.nodeAtual = node;
     }
 
     addVar(type, name, value?){
-        console.log(type);
-        console.log(name);
-        return this.nodes.push(new VarTree(type, name, value));
+        //return this.nodes.push(new VarNode(type, name, value));
+
     }    
+
+    //addIf(value)
+
+
 
     // addIf(term){
     //     return this.nodes.push(new IfTree(term));
     // }  
 
-    teste(){
-        console.log(this.nodes);
-    }
+    // teste(){
+    //     console.log(this.nodes);
+    // }
 }

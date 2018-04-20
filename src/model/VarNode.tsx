@@ -1,9 +1,8 @@
 import NodeTree from './NodeTree'
 
-export default class VarTree extends NodeTree{
+export default class VarNode extends NodeTree{
     typeVar : string; 
     name: string;
-    value: string;
 
     constructor(typeVar, name, value?){
         super();
