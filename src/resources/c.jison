@@ -307,10 +307,9 @@ init_declarator_list
 	;
 
 init_declarator 
-	: declarator { console.log($0, $1); yy.myTree.addVar($0, $1); }
+	: declarator { yy.myTree.addVar($0, $1); console.log($$); }
 	| declarator '=' initializer { 
-		console.log($0, $1, $3);
-		yy.myTree.addVar($0, $1, $3); 
+		yy.myTree.addVar($0, $1, yy.lexer.matched); 
 	}
 	;
 
@@ -549,8 +548,16 @@ external_declaration
 
 function_definition
 	: declaration_specifiers declarator declaration_list compound_statement
-	| declaration_specifiers declarator compound_statement
-	| declarator declaration_list compound_statement
-	| declarator compound_statement
+	| declaration_specifiers declarator compound_statement{
+		yy.myTree.addFunc($1, $2, yy.lexer.matched);
+	}
+	| declarator declaration_list compound_statement{
+		console.log('3');
+		console.log($0 + ' ' + $1 + ' ' +$2);
+	}
+	| declarator compound_statement{
+		console.log('4');
+		console.log(yy.lexer.matched);
+	}
 	;
 %%

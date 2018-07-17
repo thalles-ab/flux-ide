@@ -1,4 +1,5 @@
 import * as React from "react"; 
+import {v4 as uuid} from "uuid";
 
 interface MyProps{
     callbackChangeEditor: () => void
@@ -10,7 +11,7 @@ export class Diagram extends React.Component<MyProps, MyState>{
     constructor(props){
         super(props);
         this.state = {
-            dot : "digraph nomeGrafo { a [URL=\"#asdasd\"]; a -> b}"
+            dot : "digraph nomeGrafo { a [URL=\"#"+uuid()+"\"]; a -> b}"
         }
     }
 

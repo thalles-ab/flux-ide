@@ -1,16 +1,18 @@
 import NodeTree from './NodeTree'
 
 export default class VarNode extends NodeTree{
-    typeVar : string; 
+    type : string; 
     name: string;
 
-    constructor(typeVar, name, value?){
+    constructor(type, name, matched?){
         super();
-        this.typeVar = typeVar;
+        this.type = type;
         this.name = name;
 
-        if(value){
-            this.value = value;
+        if(matched)
+        {
+            var atrib = String(matched).indexOf("=");
+            console.log(String(matched).substr(atrib+1, matched.length).replace(";", "").trim());
         }
 
     }
