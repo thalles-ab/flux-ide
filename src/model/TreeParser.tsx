@@ -5,26 +5,23 @@ import FunctionNode from './FunctionNode';
 
 export default class TreeParser{
     nodes: Array<NodeTree>;
-    //nodeRadix: any; // nó raiz
-    //nodeAtual: any;
+    functions: Array<FunctionNode>;
 
     constructor(){
         this.nodes = Array();
+        this.functions = Array();
     }
-
-    // init(node){
-    //     if(this.nodeRadix){
-    //         this.nodeRadix = node;
-    //     }
-    //     this.nodeAtual = node;
-    // }
 
     addVar(type, name, matched?){
         this.nodes.push(new VarNode(type, name, matched));
     }    
 
     addFunc(type, name, matched?){
-        this.nodes.push(new FunctionNode(type, name, matched));
+        var func = new FunctionNode(type, name, matched);
+        func.nodes = this.nodes;
+
+        this.nodes = Array();
+        this.functions.push(func);
     }
 
     //addIf(value)

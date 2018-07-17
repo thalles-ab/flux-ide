@@ -1,11 +1,13 @@
 import NodeTree from "./NodeTree"
 
 export default class FunctionNode extends NodeTree{
+    nodes: Array<NodeTree>;
     type : string; 
     name: string;
 
     constructor(type, name, matched?){
         super();
+        this.nodes = Array();
         this.type = type;
         this.name = name;
 
