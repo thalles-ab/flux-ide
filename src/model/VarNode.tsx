@@ -12,7 +12,7 @@ export default class VarNode extends NodeTree{
         if(matched)
         {
             var atrib = String(matched).indexOf("=");
-            console.log(String(matched).substr(atrib+1, matched.length).replace(";", "").trim());
+            this.expression = String(matched).substr(atrib+1, matched.length).replace(";", "").trim();
         }
 
     }

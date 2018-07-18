@@ -8,7 +8,7 @@ export default class ConditionalNode extends NodeTree{
     constructor(type, condition){
         super();
         this.type = type;
-        this.value = condition;
+        this.expression = condition;
     }
 
 }

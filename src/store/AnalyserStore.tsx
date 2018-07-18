@@ -22,7 +22,6 @@ class AnalyserStore extends EventEmitter{
         ];
         Parser = new jison.Parser(fileJison);
         Parser.yy.myTree = new TreeParser();
-        console.log(Parser);
         window["ParserThalles"] = Parser;
     }
 
@@ -38,7 +37,12 @@ class AnalyserStore extends EventEmitter{
         // mark.source = null;
 
         // this.emit("analyserLex", { erros: ['ainda não tem'], value : value, event: event, mark: mark });
-        Parser.parse(S(value).replaceAll(/\r?\n|\r/g, "").s);
+        try{
+            Parser.parse(S(value).replaceAll(/\r?\n|\r/g, "").s);
+            return Parser.yy.myTree;
+        }catch(e){
+            return null;
+        }
     }
 
     create(text){

@@ -1,5 +1,6 @@
 export default class NodeTree{
-    value: string;
+    expression: string;
+    name: string;
     nextNode: NodeTree;
     
     constructor(){

@@ -4,25 +4,42 @@ import ConditionalNode from './ConditionalNode';
 import FunctionNode from './FunctionNode';
 
 export default class TreeParser{
+    atual : NodeTree;
+    expression : string;
     nodes: Array<NodeTree>;
     functions: Array<FunctionNode>;
+
+    type: string
+    name: string
+    value: string
 
     constructor(){
         this.nodes = Array();
         this.functions = Array();
     }
 
-    addVar(type, name, matched?){
-        this.nodes.push(new VarNode(type, name, matched));
-    }    
+    
 
-    addFunc(type, name, matched?){
-        var func = new FunctionNode(type, name, matched);
-        func.nodes = this.nodes;
+    // addVar(type, name, matched?){
+    //     this.expression = "";
+    //     this.atual = new VarNode(type, name);
+    //     this.nodes.push(new VarNode(type, name, matched));
+    // }    
 
-        this.nodes = Array();
-        this.functions.push(func);
-    }
+    // addExpression(str){
+    //     console.log(str);
+    //     this.expression += str;
+    // }
+
+    // addFunc(type, name, matched?){
+    //     var func = new FunctionNode(type, name, matched);
+    //     func.nodes = this.nodes;
+
+    //     this.nodes = Array();
+    //     this.functions = this.functions.filter(item => item.name !== name);
+    //     this.functions.push(func);
+    // }
+    
 
     //addIf(value)
 

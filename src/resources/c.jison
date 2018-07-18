@@ -151,10 +151,10 @@ L?\"(\\.|[^\\"])*\"	return 'STRING_LITERAL' ;
 %%
 
 primary_expression
-	: IDENTIFIER
-	| CONSTANT
-	| STRING_LITERAL
-	| '(' expression ')'
+	: IDENTIFIER { console.log(yytext); }
+	| CONSTANT { console.log(yytext); }
+	| STRING_LITERAL { console.log(yytext); }
+	| '(' expression ')' { console.log(' expression '); }
 	;
 
 postfix_expression
@@ -165,30 +165,30 @@ postfix_expression
 	| postfix_expression '.' IDENTIFIER
 	| postfix_expression PTR_OP IDENTIFIER
 	| postfix_expression INC_OP
-	| postfix_expression DEC_OP
+	| postfix_expression DEC_OP 
 	;
 
 argument_expression_list
-	: assignment_expression
+	: assignment_expression 
 	| argument_expression_list ',' assignment_expression
 	;
 
 unary_expression
-	: postfix_expression
-	| INC_OP unary_expression
-	| DEC_OP unary_expression
-	| unary_operator cast_expression
+	: postfix_expression 
+	| INC_OP unary_expression 
+	| DEC_OP unary_expression 
+	| unary_operator cast_expression  
 	| SIZEOF unary_expression
-	| SIZEOF '(' type_name ')'
+	| SIZEOF '(' type_name ')' 
 	;
 
 unary_operator
-	: '&'
-	| '*'
-	| '+'
-	| '-'
-	| '~'
-	| '!'
+	: '&' { console.log(yytext); }
+	| '*' { console.log(yytext); }
+	| '+' { console.log(yytext); }
+	| '-' { console.log(yytext); }
+	| '~' { console.log(yytext); }
+	| '!' { console.log(yytext); }
 	;
 
 cast_expression
@@ -255,7 +255,7 @@ logical_or_expression
 	;
 
 conditional_expression
-	: logical_or_expression
+	: logical_or_expression 
 	| logical_or_expression '?' expression ':' conditional_expression
 	;
 
@@ -265,17 +265,17 @@ assignment_expression
 	;
 
 assignment_operator
-	: '='
-	| MUL_ASSIGN
-	| DIV_ASSIGN
-	| MOD_ASSIGN
-	| ADD_ASSIGN
-	| SUB_ASSIGN
-	| LEFT_ASSIGN
-	| RIGHT_ASSIGN
-	| AND_ASSIGN
-	| XOR_ASSIGN
-	| OR_ASSIGN
+	: '=' { console.log(yytext); }
+	| MUL_ASSIGN { console.log(yytext); }
+	| DIV_ASSIGN { console.log(yytext); }
+	| MOD_ASSIGN { console.log(yytext); }
+	| ADD_ASSIGN { console.log(yytext); }
+	| SUB_ASSIGN { console.log(yytext); }
+	| LEFT_ASSIGN { console.log(yytext); }
+	| RIGHT_ASSIGN { console.log(yytext); }
+	| AND_ASSIGN { console.log(yytext); }
+	| XOR_ASSIGN { console.log(yytext); }
+	| OR_ASSIGN { console.log(yytext); }
 	;
 
 expression
@@ -302,15 +302,13 @@ declaration_specifiers
 	;
 
 init_declarator_list
-	: init_declarator
+	: init_declarator 
 	| init_declarator_list ',' init_declarator
 	;
 
 init_declarator 
-	: declarator { yy.myTree.addVar($0, $1); console.log($$); }
-	| declarator '=' initializer { 
-		yy.myTree.addVar($0, $1, yy.lexer.matched); 
-	}
+	: declarator { console.log('var2') ; }
+	| declarator '=' initializer  { console.log('var1') ; }
 	;
 
 storage_class_specifier
@@ -322,18 +320,18 @@ storage_class_specifier
 	;
 
 type_specifier
-	: VOID
-	| CHAR
-	| SHORT
-	| INT
-	| LONG
-	| FLOAT
-	| DOUBLE
-	| SIGNED
-	| UNSIGNED
+	: VOID { console.log(yytext); }
+	| CHAR { console.log(yytext); }
+	| SHORT { console.log(yytext); }
+	| INT { console.log(yytext); }
+	| LONG { console.log(yytext); }
+	| FLOAT { console.log(yytext); }
+	| DOUBLE { console.log(yytext); }
+	| SIGNED { console.log(yytext); }
+	| UNSIGNED { console.log(yytext); }
 	| struct_or_union_specifier
 	| enum_specifier
-	| TYPE_NAME
+	| TYPE_NAME { console.log(yytext); }
 	;
 
 struct_or_union_specifier
@@ -386,8 +384,8 @@ enumerator_list
 	;
 
 enumerator
-	: IDENTIFIER
-	| IDENTIFIER '=' constant_expression
+	: IDENTIFIER 
+	| IDENTIFIER '=' constant_expression 
 	;
 
 type_qualifier
@@ -396,18 +394,18 @@ type_qualifier
 	;
 
 declarator
-	: pointer direct_declarator
+	: pointer direct_declarator 
 	| direct_declarator
 	;
 
 direct_declarator
-	: IDENTIFIER
-	| '(' declarator ')'
-	| direct_declarator '[' constant_expression ']'
-	| direct_declarator '[' ']'
-	| direct_declarator '(' parameter_type_list ')'
-	| direct_declarator '(' identifier_list ')'
-	| direct_declarator '(' ')'
+	: IDENTIFIER = { console.log(yytext); }
+	| '(' declarator ')' { console.log('declarator 2'); } 
+	| direct_declarator '[' constant_expression ']' { console.log(yytext); }
+	| direct_declarator '[' ']' 
+	| direct_declarator '(' parameter_type_list ')' { console.log('parameter_type_list empty'); }
+	| direct_declarator '(' identifier_list ')' { console.log('identifier_list empty'); }
+	| direct_declarator '(' ')' { console.log('function empty'); }
 	;
 
 pointer
@@ -468,7 +466,7 @@ direct_abstract_declarator
 	;
 
 initializer
-	: assignment_expression
+	: assignment_expression 
 	| '{' initializer_list '}'
 	| '{' initializer_list ',' '}'
 	;
@@ -496,7 +494,7 @@ labeled_statement
 compound_statement
 	: '{' '}'
 	| '{' statement_list '}'
-	| '{' declaration_list '}'
+	| '{' declaration_list '}' 
 	| '{' declaration_list statement_list '}'
 	;
 
@@ -548,9 +546,7 @@ external_declaration
 
 function_definition
 	: declaration_specifiers declarator declaration_list compound_statement
-	| declaration_specifiers declarator compound_statement{
-		yy.myTree.addFunc($1, $2, yy.lexer.matched);
-	}
+	| declaration_specifiers declarator compound_statement
 	| declarator declaration_list compound_statement{
 		console.log('3');
 		console.log($0 + ' ' + $1 + ' ' +$2);

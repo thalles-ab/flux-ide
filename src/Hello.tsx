@@ -4,27 +4,30 @@ import * as ReactDOM from "react-dom";
 import { Router, Route, Link, browserHistory } from 'react-router'; 
 import { Editor } from "./components/Editor"; 
 import { Diagram } from './components/Diagram'
+import TreeParser from "./model/TreeParser";
 
-export default class App extends React.Component{
+interface MyState{
+    tree: TreeParser
+}
+export default class App extends React.Component<any, MyState>{
+
     constructor(props){
         super(props);
+        this.state = {
+            tree : null
+        };
     }
 
-    changeEditor(val : string){
-        console.log('foi thalles ' + val);
-    }
-
-    updateDiagram(){
-        console.log('diagrama');
+    changeEditor(tree : TreeParser){
+        this.setState({tree:tree});
     }
 
     render(){
         return (
             <div className="container">
-                <div className="grid-50"><Editor callBackChangeEditor={this.changeEditor} /></div>
+                <div className="grid-50"><Editor callBackChangeEditor={this.changeEditor.bind(this)} /></div>
                 <div className="grid-50">
-                    <div id="appBar"></div>
-                    <Diagram callbackChangeEditor={this.updateDiagram} />
+                    <Diagram tree={this.state.tree} />
                 </div>
             </div>
         );

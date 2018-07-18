@@ -32,18 +32,36 @@ html, body {
     height: 100%;
 }
 
-#graph svg{
+#graph_content, #graph{
+    height: 100%;
+}
+
+#graph_content svg{
     width: 100% important;
     height: 100% important;
     text-align: center;
 }
 
-#graph svg a:hover{
+#graph_content svg a:hover{
     cursor: pointer;
 }
 
 #appBar{
     width: 100%;
-    min-height: 2.5em;
+    height: 7%;
+    float: left;
     background: #1e1e1e;
+}
+
+#appBar p{
+    width: 30%;
+    height: 80%;
+    margin: 1% auto;
+    font-size: 18pt;
+    color: blue;
+    background: white;
+    text-align: center;
+    -webkit-border-radius: 5em;
+    -moz-border-radius: 5em;
+    border-radius: 5em;
 }

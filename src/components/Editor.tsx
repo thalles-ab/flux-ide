@@ -1,9 +1,10 @@
 import * as React from "react"
 import MyEditor from 'react-monaco-editor'
 import AnalyserStore from '../store/AnalyserStore'
+import TreeParser from "../model/TreeParser";
 
 interface MyProps{
-    callBackChangeEditor: (val: string) => void
+    callBackChangeEditor: (tree: TreeParser) => void
 };
 interface MyState{
     code: string
@@ -33,6 +34,8 @@ export class Editor extends React.Component<MyProps, MyState> {
 
     onchange(val : string, ev: monaco.editor.IModelContentChangedEvent){
         AnalyserStore.analyser(val, ev);
+//        this.props.callBackChangeEditor(AnalyserStore.analyser(val, ev)); 
+  //      this.setState({code: val});
     }
 
     render() {
@@ -48,8 +51,8 @@ export class Editor extends React.Component<MyProps, MyState> {
                 theme="vs-dark"
                 value={code}
                 options={options}
-                onChange={this.onchange}
-                editorDidMount={this.editorDidMount}
+                onChange={this.onchange.bind(this)}
+                editorDidMount={this.editorDidMount.bind(this)}
             />
         );
     }
