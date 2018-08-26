@@ -19,7 +19,7 @@ export default class App extends React.Component<any, MyState>{
     }
 
     changeEditor(tree : TreeParser){
-        this.setState({tree:tree});
+        this.setState({tree:tree} );
     }
 
     render(){

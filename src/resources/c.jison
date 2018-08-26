@@ -244,7 +244,7 @@ inclusive_or_expression
 	| inclusive_or_expression '|' exclusive_or_expression
 	;
 
-logical_and_expression
+logical_and_expression 
 	: inclusive_or_expression
 	| logical_and_expression AND_OP inclusive_or_expression
 	;
@@ -307,8 +307,8 @@ init_declarator_list
 	;
 
 init_declarator 
-	: declarator { console.log('var2') ; }
-	| declarator '=' initializer  { console.log('var1') ; }
+	: declarator { console.log('fim de uma declaração sem atribuição de valor') ; }
+	| declarator '=' initializer  { console.log('fim de uma de variavel com valor') ; }
 	;
 
 storage_class_specifier
@@ -403,7 +403,7 @@ direct_declarator
 	| '(' declarator ')' { console.log('declarator 2'); } 
 	| direct_declarator '[' constant_expression ']' { console.log(yytext); }
 	| direct_declarator '[' ']' 
-	| direct_declarator '(' parameter_type_list ')' { console.log('parameter_type_list empty'); }
+	| direct_declarator '(' parameter_type_list ')' { console.log('parameter_type_list'); }
 	| direct_declarator '(' identifier_list ')' { console.log('identifier_list empty'); }
 	| direct_declarator '(' ')' { console.log('function empty'); }
 	;
@@ -466,7 +466,7 @@ direct_abstract_declarator
 	;
 
 initializer
-	: assignment_expression 
+	: assignment_expression { console.log('expression'); }
 	| '{' initializer_list '}'
 	| '{' initializer_list ',' '}'
 	;
