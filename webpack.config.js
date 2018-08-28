@@ -18,7 +18,8 @@ module.exports = {
             ],
         },
         contentBase: './',
-        hot: true
+        hot: true,
+        disableHostCheck: true
         // https: false
     }, 
  

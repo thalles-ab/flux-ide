@@ -1,0 +1,10 @@
+void teste();
+
+int main(char ** c){
+    int i = 0;
+    int i = i + 2;
+    int i = teste();
+    int i;
+    i = i + 2;
+} 
+ 
